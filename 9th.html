@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #7a7a7a;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #9613ca;
+            color:aliceblue;
+        }
+
+        input {
+            margin-bottom: 10px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app="employeeApp" ng-controller="employeeCtrl">
+        <h2>Employee List</h2>
+        <input type="text" ng-model="searchName" placeholder="Search by Name">
+        <input type="number" ng-model="searchSalary" placeholder="Search by Salary">
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Salary</th>
+            </tr>
+            <tr ng-repeat="employee in employees | filter: {name: searchName, salary: searchSalary}">
+                <td>{{employee.name}}</td>
+                <td>{{employee.salary | currency:"€"}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script>
+        var app = angular.module('employeeApp', []);
+        app.controller('employeeCtrl', function ($scope) {
+            $scope.employees = [
+                { name: 'Ashoka', salary: 50000 },
+                { name: 'Chandra Gupta', salary: 60000 },
+                { name: 'Chanukya', salary: 75000 },
+                { name: 'Chalukya', salary: 80000 }
+            ];
+        });
+    </script>
+</body>
+
+</html>
